@@ -1,0 +1,26 @@
+version: '3'
+services:
+  backend:
+    container_name: back
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    volumes:
+      - ./backend:/backend
+    command:
+      python3 /backend/manage.py runserver 0.0.0.0:8000
+    ports:
+      - 8000:8000
+    tty: true
+
+  frontend:
+    container_name: front
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    volumes:
+      - ./frontend:/usr/src/app
+    command:
+      sh -c "cd /usr/src/app && npm start"
+    ports:
+      - "3000:3000"
