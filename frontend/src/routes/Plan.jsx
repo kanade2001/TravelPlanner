@@ -2,6 +2,9 @@ import React from 'react';
 import '../App.css';
 import Header from '../components/Header.tsx';
 import Overview from './Plan/Overview.jsx';
+import SpotList from './Plan/SpotList.jsx';
+import Itinerary from './Plan/Itinerary.jsx';
+import Payment from './Plan/Payment.jsx';
 import { SpeedDial } from '@mui/material';
 import { SpeedDialAction } from '@mui/material';
 import { SpeedDialIcon } from '@mui/material';
@@ -37,37 +40,25 @@ function Plan() {
 
   return (
     <ThemeProvider theme={theme}>
-      <Header />{ }
-      <Box width="80%" margin="auto" marginTop="30px">
-        <ButtonGroup variant="contained" aira-label="View" sx={{ width: "100%" }}>
-          {viewList.map((view) => (
-            <Button
-              id={view.id}
-              sx={{ textTransform: 'none', flex: 1, backgroundColor: selectedView === view.name ? 'primary.light' : 'primary' }}
-              value={view.name}
-              onClick={() => handleSetSelectedView(view.name)}
-            >{view.name}</Button>
-          ))}
-        </ButtonGroup>
-        {selectedView === 'Overview' ? <Overview /> : ""}
-        {selectedView === 'SpotList' ? "SpotList" : ""}
-        {selectedView === 'Itinerary' ? "Itinerary" : ""}
-        {selectedView === 'Payment' ? "Payment" : ""}
+      <Box sx={{ display: "flex", flexDirection: "column", height: "100vh"}}>
+        <Header />{ }
+        <Box width="80%" height="100%" margin="auto" marginY="30px" position="relative" sx={{ flexGrow: 1}}>
+          <ButtonGroup variant="contained" aira-label="View" sx={{ width: "100%" }}>
+            {viewList.map((view) => (
+              <Button
+                id={view.id}
+                sx={{ textTransform: 'none', flex: 1, backgroundColor: selectedView === view.name ? 'primary.light' : 'primary' }}
+                value={view.name}
+                onClick={() => handleSetSelectedView(view.name)}
+              >{view.name}</Button>
+            ))}
+          </ButtonGroup>
+          {selectedView === 'Overview' ? <Overview /> : ""}
+          {selectedView === 'SpotList' ? <SpotList /> : ""}
+          {selectedView === 'Itinerary' ? <Itinerary /> : ""}
+          {selectedView === 'Payment' ? <Payment /> : ""}
+        </Box>
       </Box>
-
-      <SpeedDial
-        ariaLabel="SpeedDial basic example"
-        sx={{ position: 'absolute', bottom: 16, right: 16 }}
-        icon={<SpeedDialIcon />}
-      >
-        {actions.map((action) => (
-          <SpeedDialAction
-            key={action.name}
-            icon={action.icon}
-            tooltipTitle={action.name}
-          />
-        ))}
-      </SpeedDial>
     </ThemeProvider>
   );
 }

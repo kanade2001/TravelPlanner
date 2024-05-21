@@ -16,9 +16,6 @@ import { ThemeProvider, createTheme } from '@mui/material/styles';
 
 const theme = createTheme();
 
-
-
-
 function Overview() {
   // Title Edit
   const [isEditTitle, setIsEditTitle] = useState(false);
