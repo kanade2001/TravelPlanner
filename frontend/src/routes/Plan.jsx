@@ -16,10 +16,10 @@ import { ThemeProvider, createTheme } from '@mui/material/styles';
 const theme = createTheme();
 
 const viewList = [
-  { name: 'Overview'},
-  { name: 'SpotList'},
-  { name: 'Itinerary'},
-  { name: 'Payment'},
+  { name: 'Overview', id: 'overview'},
+  { name: 'SpotList', id: 'spotList'},
+  { name: 'Itinerary', id: 'itinerary'},
+  { name: 'Payment', id: 'payment'},
 ];
 
 function Plan() {
@@ -42,6 +42,7 @@ function Plan() {
         <ButtonGroup variant="contained" aira-label="View" sx={{ width: "100%" }}>
           {viewList.map((view) => (
             <Button
+              id={view.id}
               sx={{ textTransform: 'none', flex: 1, backgroundColor: selectedView === view.name ? 'primary.light' : 'primary' }}
               value={view.name}
               onClick={() => handleSetSelectedView(view.name)}

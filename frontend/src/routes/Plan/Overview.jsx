@@ -1,5 +1,5 @@
-import React from 'react';
-import { SpeedDial, Typography } from '@mui/material';
+import { React, useState } from 'react';
+import { SpeedDial, TextField, Typography } from '@mui/material';
 import { SpeedDialAction } from '@mui/material';
 import { SpeedDialIcon } from '@mui/material';
 import { Room, RestaurantMenu, Flight } from '@mui/icons-material';
@@ -11,15 +11,61 @@ import ButtonGroup from '@mui/material/ButtonGroup';
 import Avatar from '@mui/material/Avatar';
 import Stack from '@mui/material/Stack';
 
+
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 
 const theme = createTheme();
 
+
+
+
 function Overview() {
+  // Title Edit
+  const [isEditTitle, setIsEditTitle] = useState(false);
+  const handleSetIsEditTitle = (event) => {
+    setIsEditTitle(event.target.checked)
+  }
+
+  // Schedule Edit
+  const [isEditSchedule, setIsEditSchedule] = useState(false);
+  const handleSetIsEditSchedule = (event) => {
+    setIsEditSchedule(event.target.checked)
+  }
+
   return (
     <ThemeProvider theme={theme}>
+      {/* Title */}
+      <Box marginTop="30px" padding="10px" sx={{ border: 2, borderColor: "primary.main", borderRadius: 2}}>
+        <Stack direction={"row"} spacing={2}>
+          <Typography variant="h5" color="primary.main" sx={{ textAlign: "left", flex: 1 }}>
+            Titlle
+          </Typography>
+          <FormControlLabel control={<Switch checked={isEditTitle} onChange={handleSetIsEditTitle} />} label="Edit" />
+        </Stack>
+        <TextField
+          id="travelTitle"
+          label=""
+          defaultValue="MyTravel"
+          fullWidth
+          InputProps={{
+            readOnly: isEditTitle ? false : true,
+          }}
+        />
+      </Box>
+
+      {/* Schedule */}
+      <Box marginTop="30px" padding="10px" sx={{ border: 2, borderColor: "primary.main", borderRadius: 2}}>
+      <Stack direction={"row"} spacing={2}>
+          <Typography variant="h5" color="primary.main" sx={{ textAlign: "left", flex: 1 }}>
+            Schedule
+          </Typography>
+          <FormControlLabel control={<Switch checked={isEditSchedule} onChange={handleSetIsEditSchedule} />} label="Edit" />
+        </Stack>
+      </Box>
+
+      {/* Members */}
       <Box marginTop="30px" padding="10px" sx={{ border: 2, borderColor: "primary.main", borderRadius: 2 }}>
-        <Typography variant="h6" color="primary.main" sx={{ textAlign: "left"}}>
+        <Typography variant="h5" color="primary.main" sx={{ textAlign: "left"}}>
           Members
         </Typography>
         <Stack direction="row" spacing={1}>
@@ -27,6 +73,8 @@ function Overview() {
           <Avatar>K</Avatar>
         </Stack>
       </Box>
+
+
       <Box marginTop="30px" padding="10px" sx={{ border: 2, borderColor: "primary.main", borderRadius: 2}}></Box>
       <Box marginTop="30px" padding="10px" sx={{ border: 2, borderColor: "primary.main", borderRadius: 2}}></Box>
     </ThemeProvider>
