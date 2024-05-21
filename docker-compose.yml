@@ -20,6 +20,7 @@ services:
       dockerfile: Dockerfile
     volumes:
       - ./frontend:/usr/src/app
+      - /usr/src/app/node_modules
     command:
       sh -c "cd /usr/src/app && npm start"
     ports:
