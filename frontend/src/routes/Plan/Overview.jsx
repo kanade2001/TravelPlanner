@@ -24,13 +24,22 @@ function Overview() {
   const [isEditTitle, setIsEditTitle] = useState(false);
   const handleSetIsEditTitle = (event) => {
     setIsEditTitle(event.target.checked)
-  }
+  };
+  const [titleValue, setTitleValue] = useState("MyTravel");
+  const handleChangeTitleValue = (event) => {
+    setTitleValue(event.target.value);
+  };
+  const [savedTitleValue, setSavedTitleValue] = useState("MyTravel");
+  const handleSetSavedTitleValue = () => {
+    setSavedTitleValue(titleValue);
+    setIsEditTitle(false);
+  };
 
   // Schedule Edit
   const [isEditSchedule, setIsEditSchedule] = useState(false);
   const handleSetIsEditSchedule = (event) => {
     setIsEditSchedule(event.target.checked)
-  }
+  };
 
   return (
     <ThemeProvider theme={theme}>
@@ -42,15 +51,22 @@ function Overview() {
           </Typography>
           <FormControlLabel control={<Switch checked={isEditTitle} onChange={handleSetIsEditTitle} />} label="Edit" />
         </Stack>
-        <TextField
-          id="travelTitle"
-          label=""
-          defaultValue="MyTravel"
-          fullWidth
-          InputProps={{
-            readOnly: isEditTitle ? false : true,
-          }}
-        />
+        <Stack direction={"row"}>
+          <TextField
+            id="travelTitle"
+            label=""
+            value={titleValue}
+            fullWidth
+            InputProps={{
+              readOnly: isEditTitle ? false : true,
+            }}
+            onChange={handleChangeTitleValue}
+          />
+
+          {isEditTitle ? <Button variant="contained" onClick={handleSetSavedTitleValue}>Save</Button> : ""}
+        </Stack>
+        { titleValue }<br></br>
+        { savedTitleValue}
       </Box>
 
       {/* Schedule */}
