@@ -12,6 +12,10 @@ const Header: React.FC = () => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const navigate = useNavigate();
 
+  const handleNavigation = () => { // Operation when title is clicked
+    navigate('/');
+  }
+
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -26,14 +30,21 @@ const Header: React.FC = () => {
   }
 
 
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
         <Toolbar>
           {/* Title */}
-          <Link to="/" style={{ textDecoration: 'None', color: "inherit", }}>
-            <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>Travel Planner</Typography>
-          </Link>
+          <Typography
+            variant="h6"
+            component="div"
+            sx={{ flexGrow: 1, cursor: 'pointer', textAlign: 'left'}}
+            onClick={handleNavigation}
+            style={{ textDecoration:'none', color: "inherit"}}
+          >
+            Travel Planner
+          </Typography>
           <Box sx={{ flexGrow: 1 }} /> {/* padding */}
           <Link to="/login" style={{ textDecoration: 'None', color: "inherit" }}>
             <Typography variant="h6" component="div">Login</Typography>
